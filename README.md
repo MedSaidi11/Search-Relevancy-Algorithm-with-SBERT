@@ -1,7 +1,7 @@
 # SBERT-Based Search Relevance Enhancement
 
 ## 🌟 Project Overview  
-This project aims to improve search relevance by utilizing **Sentence-BERT (SBERT)** for generating semantic embeddings and the **ANNOY** library for quick approximate nearest neighbor searches. The solution is deployed on **AWS** with **Docker** containers, providing an accessible **Flask API** for easy interaction and retrieval of highly relevant news articles.
+This project aims to improve search relevance by utilizing **Sentence-BERT (SBERT)** for generating semantic embeddings and the **ANNOY** library for quick approximate nearest neighbor searches. The solution is deployed on **AWS** with **Docker** containers, providing an accessible **FastAPI** for easy interaction and retrieval of highly relevant news articles.
 
 ---
 
@@ -14,13 +14,14 @@ The primary goal is to refine the user search experience for news articles by im
 ---
 
 ## 📚 Dataset Overview  
-The dataset contains 22,399 articles, each with the following attributes:  
+The dataset contains 13,000 articles, each with the following attributes:  
 - **article_id**: Unique identifier for each news piece.  
 - **category**/**subcategory**: High-level and detailed topic classifications.  
 - **title**: A brief headline summarizing the article.  
 - **published_date**: The date the article was released.  
 - **text**: The full text of the article.  
 - **source**: The originating publication or source.
+  ![Alt text](images/search_relevancy.png)
 
 ---
 
