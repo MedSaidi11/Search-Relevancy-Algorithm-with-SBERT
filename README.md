@@ -14,7 +14,7 @@ The primary goal is to refine the user search experience for news articles by im
 ---
 
 ## 📚 Dataset Overview  
-The dataset contains 13,000 articles, each with the following attributes:  
+The dataset contains 13,320 articles, each with the following attributes:  
 - **article_id**: Unique identifier for each news piece.  
 - **category**/**subcategory**: High-level and detailed topic classifications.  
 - **title**: A brief headline summarizing the article.  
