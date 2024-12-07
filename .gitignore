@@ -1,6 +1,9 @@
 .DS_Store
 Thumbs.db
 
+/data/*
+/models/*
+
 logs/
 *.log
 npm-debug.log*

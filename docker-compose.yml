@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  server:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    container_name: server
+    restart: always
+    ports:
+      - '8000:8000'
+    volumes:
+      - '.:/app'
+    networks: 
+      - search_network
+    depends_on:
+      - database 
+
+  database:
+    image: ankane/pgvector
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres     
+      POSTGRES_PASSWORD: postgres 
+      POSTGRES_DB: postgres       
+    ports:
+      - 5432:5432
+    restart: always
+    networks: 
+      - search_network
+
+networks: 
+  search_network:
+    driver: bridge
