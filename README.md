@@ -27,40 +27,22 @@ The dataset contains 13,320 articles, each with the following attributes:
 
 ## 🧰 Technology Stack  
 - **Programming Language**: Python  
-- **Key Libraries**: `pandas`, `numpy`, `spacy`, `sentence-transformers`, `annoy`, `flask`, `AWS`  
+- **Key Libraries**: `pandas`, `numpy`, `,ltk`, `sentence-transformers`, `annoy`, `fastapi`, `AWS`  
 - **Cloud Deployment**: AWS EC2  
 - **Containerization**: Docker  
 
 ---
 
-## 🛠️ Methodology  
-1. **Data Preparation**:  
-   - Cleanse and preprocess articles through tokenization, stopword removal, and normalization.
+## 📝 Input  
+- **query**: A list of sentences or keywords for the search query.  
+- **k**: The number of top-k most relevant articles to retrieve based on the query.  
 
-2. **Embedding Generation**:  
-   - Use the **SBERT** model to generate dense, semantically meaningful embeddings for each article.
-
-3. **Indexing with ANNOY**:  
-   - Create an index of embeddings using **ANNOY** for fast similarity searches, optimized by cosine similarity.
-
-4. **Cloud Deployment**:  
-   - Containerize all components (Flask API, SBERT model, ANNOY index) and deploy them on AWS EC2 instances using Docker, ensuring scalability and ease of access.
+![Search Input Diagram](images/search_relevancy1.png)
 
 ---
 
-## 🗂️ Project Directory Structure  
-- **`data/`**: Contains the dataset and supporting files.  
-- **`notebooks/`**: Jupyter notebooks for experimentation and reference.  
-- **`src/`**: Source code including functions and modules.  
-- **`server.py`**: Flask application to serve API requests.  
-- **`requirements.txt`**: Required Python dependencies.  
-- **`Dockerfile` & `docker-compose.yml`**: Configuration files for Docker-based deployment.  
-- **`demo-notes.md` & `tutorial.md`**: Documentation with instructions to run the project.
+## 📤 Output  
+The output consists of each input query paired with the top-k most relevant articles, ranked by their similarity to the query.  
 
----
+![Search Output Diagram](images/search_relevancy2.png)
 
-## 🚢 Deployment Instructions  
-1. **Build the Docker Image**:  
-   To create the project container, run the following command:  
-   ```bash
-   docker build -t search-relevance .  
