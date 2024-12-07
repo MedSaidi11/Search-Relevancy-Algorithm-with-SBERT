@@ -37,12 +37,12 @@ The dataset contains 13,320 articles, each with the following attributes:
 - **query**: A list of sentences or keywords for the search query.  
 - **k**: The number of top-k most relevant articles to retrieve based on the query.  
 
-![Search Input Diagram](images/search_relevancy1.png)
+![Search Input Diagram](images/search_relevancy2.png)
 
 ---
 
 ## 📤 Output  
 The output consists of each input query paired with the top-k most relevant articles, ranked by their similarity to the query.  
 
-![Search Output Diagram](images/search_relevancy2.png)
+![Search Output Diagram](images/search_relevancy3.png)
 
