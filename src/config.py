@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     DATABASE_USERNAME: str = "postgres"
     DATABASE_NAME: str = "postgres"
     DATABASE_PASSWORD: str = "postgres"
-    DATABASE_HOST: str = "host.docker.internal"
+    DATABASE_HOST: str = "54.196.62.32"
     DATABASE_PORT: str = "5432" 
     TEXT_SECTION_TYPE: Optional[Literal["sentence","paragraph"]] = None
     TRAIN_DATA_INPUT_TYPES: list = ["title"]
