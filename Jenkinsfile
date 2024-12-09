@@ -18,22 +18,10 @@ pipeline {
                 git branch: 'prod', url: 'https://github.com/MedSaidi11/Semantic-Search-Engine-using-Sentence-BERT.git'
             }
         }
-
-        stage('Print Environment Variables') {
-            steps {
-                script {
-                    // Printing only non-sensitive environment variables for debugging
-                    echo "AWS_REGION: $AWS_REGION"
-                    echo "EC2_INSTANCE_ID: $EC2_INSTANCE_ID"
-                    // Avoid printing AWS Access Keys as they are sensitive
-                }
-            }
-        }
-
+        
         stage('Restart EC2 Instance') {
             steps {
                 script {
-                    // Use AWS CLI to restart EC2 instance
                     sh """
                         aws ec2 reboot-instances --instance-ids $EC2_INSTANCE_ID --region $AWS_REGION
                     """
