@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        EC2_INSTANCE_ID = credentials("EC2_INSTANCE_ID")
+        EC2_INSTANCE_ID = credentials("INSTANCE_ID")
         AWS_REGION = credentials("AWS_REGION")     
         AWS_ACCESS_KEY_ID = credentials("AWS_ACCESS_KEY_ID")
         AWS_SECRET_ACCESS_KEY = credentials("AWS_SECRET_ACCESS_KEY")
@@ -24,7 +24,7 @@ pipeline {
                 script {
                     // Use AWS CLI to restart EC2 instance
                     sh """
-                        aws ec2 reboot-instances --instance-ids ${EC2_INSTANCE_ID} --region ${AWS_REGION}
+                        aws ec2 reboot-instances --instance-ids $EC2_INSTANCE_ID --region $AWS_REGION
                     """
                 }
             }
