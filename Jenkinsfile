@@ -14,8 +14,8 @@ pipeline {
                 withCredentials([
                     usernamePassword(
                         credentialsId: 'INSTANCE_ID', 
-                        usernameVariable: 'INSTANCE_ID', 
-                        passwordVariable: 'EC2_INSTANCE_ID'
+                        usernameVariable: 'EC2_INSTANCE_ID', 
+                        passwordVariable: 'INSTANCE_ID'
                     ),
                     usernamePassword(
                         credentialsId: 'AWS_REGION', 
@@ -29,8 +29,8 @@ pipeline {
                     ),
                     usernamePassword(
                         credentialsId: 'SECRET-ACCESS_KEY', 
-                        usernameVariable: 'SECRET-ACCESS_KEY', 
-                        passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+                        usernameVariable: 'AWS_SECRET_ACCESS_KEY', 
+                        passwordVariable: 'SECRET-ACCESS_KEY'
                     )
                 ])
                 script {
