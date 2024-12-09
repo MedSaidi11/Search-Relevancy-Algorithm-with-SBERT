@@ -13,13 +13,13 @@ pipeline {
         }
         
         stage('Restart EC2 Instance') {
-            withCredentials([
+            steps {
+                withCredentials([
                     string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
                     string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
                     string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
                     string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
                 ])
-            steps {
                 script {
                     sh """
                         aws ec2 reboot-instances --instance-ids $EC2_INSTANCE_ID --region $AWS_REGION
@@ -29,13 +29,13 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            withCredentials([
+            steps {
+                withCredentials([
                     string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
                     string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
                     string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
                     string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
                 ])
-            steps {
                 script {
                     sh """
                         docker-compose build
@@ -45,13 +45,13 @@ pipeline {
         }
 
         stage('Deploy Docker Container') {
-            withCredentials([
+            steps {
+                withCredentials([
                     string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
                     string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
                     string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
                     string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
                 ])
-            steps {
                 script {
                     sh """
                         docker-compose up
