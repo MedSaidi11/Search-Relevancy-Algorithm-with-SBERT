@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     environment {
-        EC2_INSTANCE_ID = credentials("INSTANCE_ID")
-        AWS_REGION = credentials("AWS_REGION")     
-        AWS_ACCESS_KEY_ID = credentials("AWS_ACCESS_KEY_ID")
-        AWS_SECRET_ACCESS_KEY = credentials("SECRET-ACCESS_KEY")
+        EC2_INSTANCE_ID = string(credentials("INSTANCE_ID"))
+        AWS_REGION = string(credentials("AWS_REGION"))   
+        AWS_ACCESS_KEY_ID = string(credentials("AWS_ACCESS_KEY_ID"))
+        AWS_SECRET_ACCESS_KEY = string(credentials("SECRET-ACCESS_KEY"))
     }
 
     triggers {
