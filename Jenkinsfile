@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    environment {
+        EC2_INSTANCE_ID = credentials("INSTANCE_ID")
+        AWS_REGION = credentials("AWS_REGION")     
+        AWS_ACCESS_KEY_ID = credentials("AWS_ACCESS_KEY_ID")
+        AWS_SECRET_ACCESS_KEY = credentials("SECRET-ACCESS_KEY")
+    }
+
     triggers {
         githubPush()
     }
@@ -11,17 +18,13 @@ pipeline {
                 git branch: 'prod', url: 'https://github.com/MedSaidi11/Semantic-Search-Engine-using-Sentence-BERT.git'
             }
         }
-        
+
         stage('Restart EC2 Instance') {
             steps {
-                withCredentials([
-                    string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
-                    string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
-                    string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
-                    string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
-                ])
                 script {
+                    // Use AWS CLI to restart EC2 instance
                     sh """
+                        echo "Rebooting EC2 instance with ID: $EC2_INSTANCE_ID in region: $AWS_REGION"
                         aws ec2 reboot-instances --instance-ids $EC2_INSTANCE_ID --region $AWS_REGION
                     """
                 }
@@ -30,12 +33,6 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                withCredentials([
-                    string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
-                    string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
-                    string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
-                    string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
-                ])
                 script {
                     sh """
                         docker-compose build
@@ -46,12 +43,6 @@ pipeline {
 
         stage('Deploy Docker Container') {
             steps {
-                withCredentials([
-                    string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
-                    string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
-                    string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
-                    string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
-                ])
                 script {
                     sh """
                         docker-compose up
