@@ -30,7 +30,7 @@ pipeline {
                     usernamePassword(
                         credentialsId: 'SECRET-ACCESS_KEY', 
                         usernameVariable: 'AWS_SECRET_ACCESS_KEY', 
-                        passwordVariable: 'SECRET-ACCESS_KEY'
+                        passwordVariable: 'SECRET_ACCESS_KEY'
                     )
                 ])
                 script {
@@ -55,7 +55,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker-compose up
+                        docker-compose up -d
                     """
                 }
             }
