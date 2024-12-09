@@ -1,11 +1,5 @@
 pipeline {
     agent any
-    environment {
-        EC2_INSTANCE_ID = "i-0d973c9e41d4061d0"
-        AWS_REGION = "us-east-1"     
-        AWS_ACCESS_KEY_ID = credentials("AWS_ACCESS_KEY_ID")
-        AWS_SECRET_ACCESS_KEY = credentials("SECRET-ACCESS_KEY")
-    }
     triggers {
         githubPush()
     }
@@ -17,6 +11,28 @@ pipeline {
         }
         stage('Restart EC2 Instance') {
             steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'INSTANCE_ID', 
+                        usernameVariable: 'INSTANCE_ID', 
+                        passwordVariable: 'EC2_INSTANCE_ID'
+                    ),
+                    usernamePassword(
+                        credentialsId: 'AWS_REGION', 
+                        usernameVariable: 'AWS_REGION', 
+                        passwordVariable: 'AWS_REGION'
+                    ),
+                    usernamePassword(
+                        credentialsId: 'AWS_ACCESS_KEY', 
+                        usernameVariable: 'AWS_ACCESS_KEY_ID', 
+                        passwordVariable: 'AWS_ACCESS_KEY_ID'
+                    ),
+                    usernamePassword(
+                        credentialsId: 'SECRET-ACCESS_KEY', 
+                        usernameVariable: 'SECRET-ACCESS_KEY', 
+                        passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+                    )
+                ])
                 script {
                     // Use AWS CLI to restart EC2 instance
                     sh """
