@@ -6,12 +6,6 @@ pipeline {
     }
 
     stages {
-        withCredentials([
-                    string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
-                    string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
-                    string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
-                    string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
-                ])
         stage('Checkout') {
             steps {
                 git branch: 'prod', url: 'https://github.com/MedSaidi11/Semantic-Search-Engine-using-Sentence-BERT.git'
@@ -19,6 +13,12 @@ pipeline {
         }
         
         stage('Restart EC2 Instance') {
+            withCredentials([
+                    string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
+                    string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
+                    string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
+                    string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
+                ])
             steps {
                 script {
                     sh """
@@ -29,6 +29,12 @@ pipeline {
         }
 
         stage('Build Docker Image') {
+            withCredentials([
+                    string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
+                    string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
+                    string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
+                    string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
+                ])
             steps {
                 script {
                     sh """
@@ -39,6 +45,12 @@ pipeline {
         }
 
         stage('Deploy Docker Container') {
+            withCredentials([
+                    string(credentialsId: 'INSTANCE_ID', variable: 'EC2_INSTANCE_ID'),
+                    string(credentialsId: 'AWS_REGION', variable: 'AWS_REGION'),
+                    string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
+                    string(credentialsId: 'SECRET-ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
+                ])
             steps {
                 script {
                     sh """
